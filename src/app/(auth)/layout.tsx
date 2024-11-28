@@ -4,6 +4,6 @@ export default function AuthenticationLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="h-screen flex items-center justify-center">{children}</div>
+    <div className="flex h-screen items-center justify-center">{children}</div>
   );
 }
