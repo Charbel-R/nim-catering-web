@@ -1,12 +1,17 @@
 import Link from "next/link";
 
-import { Menu } from "lucide-react";
+import {
+  CircleUserRound,
+  House,
+  LucideLayoutDashboard,
+  Menu
+} from "lucide-react";
 
 import { ThemeToggle } from "@/components/theme-toggle";
 import {
   Sheet,
-  SheetClose,
   SheetContent,
+  SheetDescription,
   SheetTitle,
   SheetTrigger
 } from "@/components/ui/sheet";
@@ -22,16 +27,30 @@ export default function Header() {
             <Menu className="h-6 w-6" />
           </SheetTrigger>
           <SheetContent side="left">
-            <SheetTitle>Menu</SheetTitle>
+            <SheetDescription className="sr-only">
+              Main navigation for Customers
+            </SheetDescription>
+            <SheetTitle>
+              <Logo />
+            </SheetTitle>
             <ul className="mt-10 flex flex-col gap-3 text-sm">
               <li>
-                <SheetClose asChild>
-                  <Logo />
-                </SheetClose>
+                <Link href="/dashboard" className="flex gap-4">
+                  <LucideLayoutDashboard className="h-5 w-5" />
+                  <p>Admin&apos;s Dashboard</p>
+                </Link>
               </li>
-
               <li>
-                <Link href="/dashboard">Admin Dashboard</Link>
+                <Link href="/" className="flex gap-4">
+                  <House className="h-5 w-5" />
+                  <p>Menu</p>
+                </Link>
+              </li>
+              <li>
+                <Link href={"/profile"} className="flex gap-4">
+                  <CircleUserRound className="h-5 w-5" />
+                  <p>Profile</p>
+                </Link>
               </li>
             </ul>
           </SheetContent>
@@ -43,9 +62,15 @@ export default function Header() {
           </li>
         </ul>
 
-        <ul className="hidden text-sm font-medium sm:flex sm:items-center">
+        <ul className="hidden gap-4 text-sm font-medium sm:flex sm:items-center">
           <li>
             <Link href="/dashboard">Admin</Link>
+          </li>
+          <li>
+            <Link href="/">Menu</Link>
+          </li>
+          <li>
+            <Link href="/profile">Profile</Link>
           </li>
         </ul>
 
