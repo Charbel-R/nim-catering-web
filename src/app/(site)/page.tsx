@@ -2,8 +2,15 @@ import Link from "next/link";
 
 import Logo from "@/components/logo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import prisma from "@/lib/db";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const categories = await prisma.category.findMany({
+    where: {
+      published: true
+    }
+  });
+
   const cateringInfo = {
     name: "Catering",
     description1:
@@ -11,19 +18,6 @@ export default function HomePage() {
     description2:
       "For specific wishes, please email nimcateringenevents@gmail.com or call 06 51 79 22 40"
   };
-  const categories = [
-    { id: 1, name: "SNACKS", slug: "snacks" },
-    { id: 2, name: "BORREL PLATEAU", slug: "borrel-plateu" },
-    { id: 3, name: "VOOR GERECHT", slug: "voor-gerecht" },
-    { id: 4, name: "HOOFD GERECHT", slug: "hoofd-gerecht" },
-    { id: 5, name: "BBQ", slug: "bbq" },
-    { id: 6, name: "LUNCH", slug: "lunch" },
-    { id: 7, name: "BUFFET", slug: "buffet" },
-    { id: 8, name: "NA GERECHT", slug: "na-gerecht" },
-    { id: 9, name: "MENU", slug: "menu" },
-    { id: 10, name: "WALKING DINNER", slug: "walking-dinner" },
-    { id: 11, name: "Caviar", slug: "caviar" }
-  ];
 
   return (
     <>
