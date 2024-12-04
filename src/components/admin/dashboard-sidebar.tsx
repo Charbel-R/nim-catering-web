@@ -2,12 +2,15 @@ import Link from "next/link";
 
 import {
   ArrowLeft,
+  ChevronDown,
   ChevronUp,
   Flag,
   History,
   LayoutDashboard,
+  MenuIcon,
   Search,
   Settings,
+  Settings2,
   User2,
   UserRoundCog
 } from "lucide-react";
@@ -23,9 +26,17 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
   SidebarRail
 } from "@/components/ui/sidebar";
 
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger
+} from "../ui/collapsible";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -45,21 +56,13 @@ const items = [
     url: "/dashboard/search",
     icon: Search
   },
+
   {
     title: "Reports",
     url: "/dashboard/reports",
     icon: Flag
   },
-  {
-    title: "History",
-    url: "/dashboard/history",
-    icon: History
-  },
-  {
-    title: "Profile",
-    url: "/dashboard/profile",
-    icon: UserRoundCog
-  },
+
   {
     title: "Settings",
     url: "/dashboard/settings",
@@ -86,7 +89,6 @@ export default function DashboardSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Admin Panel</SidebarGroupLabel>
-
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
@@ -102,7 +104,41 @@ export default function DashboardSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel className="sr-only">Menu</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <Collapsible defaultOpen className="group/collapsible">
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuSubButton>
+                      <MenuIcon />
+                      <span>Menu</span>
+                      <ChevronDown className="ml-auto" />
+                    </SidebarMenuSubButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <SidebarMenuSubButton asChild>
+                      <Link href="/dashboard/categories">
+                        <Settings2 />
+                        <span>Categories</span>
+                      </Link>
+                    </SidebarMenuSubButton>
+                    <SidebarMenuSubButton asChild>
+                      <Link href="/dashboard/products">
+                        <Settings2 />
+                        <span>Products</span>
+                      </Link>
+                    </SidebarMenuSubButton>
+                  </CollapsibleContent>
+                </SidebarMenuItem>
+              </Collapsible>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
+
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -118,10 +154,9 @@ export default function DashboardSidebar() {
                 className="w-[--radix-popper-anchor-width]"
               >
                 <DropdownMenuItem>
-                  <span>Account</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span>Billing</span>
+                  <Link href="/dashboard/profile">
+                    <span>Profile</span>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <span>Sign out</span>
