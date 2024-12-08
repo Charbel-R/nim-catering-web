@@ -1,3 +1,4 @@
+import { DataTableDemo } from "@/components/admin/invoices/demo-invoices-table";
 import { InvoicesTable } from "@/components/admin/invoices/invoices-table";
 
 export default function InvoicesPage() {
@@ -6,6 +7,7 @@ export default function InvoicesPage() {
       <div>
         <h1 className="text-3xl font-bold">Invoices page</h1>
         <InvoicesTable />
+        <DataTableDemo />
       </div>
     </section>
   );

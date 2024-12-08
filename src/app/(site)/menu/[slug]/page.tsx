@@ -2,6 +2,7 @@ import { ShoppingBasket } from "lucide-react";
 
 import {
   Card,
+  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -37,16 +38,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       <section className="mt-6 flex flex-col gap-4">
         <ul>
           {category.products.map((product) => (
-            <Card key={product.id} className="flex justify-between px-10">
+            <Card key={product.id} className="mt-5 flex justify-between px-10">
               <CardHeader>
                 <CardTitle>{product.name}</CardTitle>
                 <CardDescription>{product.description}</CardDescription>
               </CardHeader>
-              <CardFooter className="gap-9">
-                <div className="flex gap-2">
-                  <ShoppingBasket></ShoppingBasket>
-                </div>
-                <CardTitle>{formatPrice(product.price)}</CardTitle>
+              <CardFooter className="flex items-center gap-5">
+                <ShoppingBasket></ShoppingBasket>
+                <div>{formatPrice(product.price)}</div>
               </CardFooter>
             </Card>
           ))}
