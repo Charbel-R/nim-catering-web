@@ -5,14 +5,13 @@ import {
   ChevronDown,
   ChevronUp,
   Flag,
-  History,
   LayoutDashboard,
   MenuIcon,
   Search,
   Settings,
   Settings2,
   User2,
-  UserRoundCog
+  Wallet
 } from "lucide-react";
 
 import {
@@ -26,9 +25,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
   SidebarMenuSubButton,
-  SidebarMenuSubItem,
   SidebarRail
 } from "@/components/ui/sidebar";
 
@@ -55,6 +52,11 @@ const items = [
     title: "Search",
     url: "/dashboard/search",
     icon: Search
+  },
+  {
+    title: "Invoices",
+    url: "/dashboard/invoices",
+    icon: Wallet
   },
 
   {

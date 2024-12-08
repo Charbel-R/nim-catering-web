@@ -13,14 +13,19 @@ import {
 } from "@/components/ui/drawer";
 
 interface AddProductDrawerProps {
-  categories: {
+  category?: {
+    id: string;
+    name: string;
+  };
+  categories?: {
     id: string;
     name: string;
   }[];
 }
 
 export default function AddProductDrawer({
-  categories
+  categories,
+  category
 }: AddProductDrawerProps) {
   return (
     <Drawer>
@@ -36,7 +41,8 @@ export default function AddProductDrawer({
             <DrawerTitle className="sr-only">Add Product</DrawerTitle>
             <DrawerClose />
           </DrawerHeader>
-          <NewProductForm categories={categories} />
+          {category && <NewProductForm category={category} />}
+          {categories && <NewProductForm categories={categories} />}
 
           <DrawerFooter>
             <DrawerClose asChild>

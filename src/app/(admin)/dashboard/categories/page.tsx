@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import CreateCategoryForm from "@/components/forms/create-category-form";
 import {
   Card,
@@ -16,13 +18,17 @@ export default async function CategogiesPage() {
         <h1 className="text-2xl font-bold">Categories</h1>
         <ul className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
           {categories.map((category) => (
-            <Card key={category.id}>
-              <CardHeader>{category.name}</CardHeader>
-              <CardDescription className="sr-only">
-                {category.name}
-              </CardDescription>
-              <CardFooter></CardFooter>
-            </Card>
+            <li key={category.id}>
+              <Link href={`/dashboard/categories/${category.slug}`}>
+                <Card>
+                  <CardHeader>{category.name}</CardHeader>
+                  <CardDescription className="sr-only">
+                    {category.name}
+                  </CardDescription>
+                  <CardFooter></CardFooter>
+                </Card>
+              </Link>
+            </li>
           ))}
         </ul>
       </div>

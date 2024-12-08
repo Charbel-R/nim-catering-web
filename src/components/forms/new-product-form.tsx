@@ -28,7 +28,11 @@ import { Switch } from "../ui/switch";
 import { Textarea } from "../ui/textarea";
 
 interface CreateProductFormProps {
-  categories: {
+  category?: {
+    id: string;
+    name: string;
+  };
+  categories?: {
     id: string;
     name: string;
   }[];
@@ -46,7 +50,8 @@ const formSchema = z.object({
 });
 
 export default function CreateProductForm({
-  categories
+  categories,
+  category
 }: CreateProductFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -65,7 +70,12 @@ export default function CreateProductForm({
     formDataToSubmit.append("description", formData.description);
     formDataToSubmit.append("price", formData.price);
     formDataToSubmit.append("published", formData.published ? "true" : "false");
-    formDataToSubmit.append("category", formData.category);
+    if (categories) {
+      formDataToSubmit.append("category", formData.category);
+    }
+    if (category) {
+      formDataToSubmit.append("category", category.id);
+    }
 
     createProduct(formDataToSubmit);
     form.reset();
@@ -73,6 +83,12 @@ export default function CreateProductForm({
 
   return (
     <Form {...form}>
+      {category && (
+        <h2 className="font-bold">
+          Add a new product to{" "}
+          <span className="text-xl text-green-400">{category.name}</span>
+        </h2>
+      )}
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
         <FormField
           control={form.control}
@@ -139,30 +155,35 @@ export default function CreateProductForm({
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="category"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Category</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a category that best describes the product" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {categories.map((category) => (
-                    <SelectItem key={category.id} value={category.id}>
-                      {category.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {categories && (
+          <FormField
+            control={form.control}
+            name="category"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Category</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a category that best describes the product" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {categories.map((category) => (
+                      <SelectItem key={category.id} value={category.id}>
+                        {category.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
         <Button
           type="submit"
           className="mt-4 bg-blue-400 py-2 font-bold text-white hover:bg-blue-600"

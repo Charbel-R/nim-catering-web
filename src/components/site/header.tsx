@@ -40,6 +40,7 @@ export default function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-background/20 py-6 backdrop-blur-sm">
       <nav className="container flex items-center justify-between">
+        {/* Mobile navigation */}
         <Sheet>
           <SheetTrigger className="sm:hidden">
             <Menu className="h-6 w-6" />
@@ -64,6 +65,7 @@ export default function Header() {
           </SheetContent>
         </Sheet>
 
+        {/* Desktop navigation */}
         <ul className="hidden text-sm font-medium sm:flex sm:items-center sm:gap-14">
           <li>
             <Logo />

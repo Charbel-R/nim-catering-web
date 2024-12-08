@@ -1,8 +1,18 @@
+import { z } from "zod";
+
 import { createCategory } from "@/actions/categories-actions";
 
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
+
+// TODO: add the zod schema for the new category
+const newCategorySchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: "Name must be at least 2 characters." })
+    .max(50, { message: "Name must be at most 50 characters." })
+});
 
 export default function CreateCategoryForm() {
   return (

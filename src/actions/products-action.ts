@@ -10,7 +10,12 @@ export async function createProduct(formData: FormData) {
       name: formData.get("name") as string,
       description: formData.get("description") as string,
       price: Number(formData.get("price")),
-      published: formData.get("published") === "false",
+      published:
+        formData.get("published") === "true"
+          ? true
+          : formData.get("published") === "false"
+            ? false
+            : undefined,
       slug: (formData.get("name") as string).replace(/\s+/g, "-").toLowerCase(),
       categoryId: formData.get("category") as string
     }
@@ -25,7 +30,12 @@ export async function updateProduct(id: string, formData: FormData) {
       name: formData.get("name") as string,
       description: formData.get("description") as string,
       price: Number(formData.get("price")),
-      published: formData.get("published") === "false",
+      published:
+        formData.get("published") === "true"
+          ? true
+          : formData.get("published") === "false"
+            ? false
+            : undefined,
       slug: (formData.get("name") as string).replace(/\s+/g, "-").toLowerCase(),
       categoryId: formData.get("category") as string
     }
@@ -36,4 +46,5 @@ export async function deleteProduct(id: string) {
   await prisma.product.delete({
     where: { id }
   });
+  revalidatePath("/dashboard/products");
 }
