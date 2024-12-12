@@ -25,7 +25,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSubButton,
   SidebarRail
 } from "@/components/ui/sidebar";
 
@@ -72,6 +71,19 @@ const items = [
   }
 ];
 
+const menuSubItems = [
+  {
+    title: "Categories",
+    url: "/dashboard/categories",
+    icon: Settings2
+  },
+  {
+    title: "Products",
+    url: "/dashboard/products",
+    icon: Settings2
+  }
+];
+
 export default function DashboardSidebar() {
   return (
     <Sidebar collapsible="icon" variant="inset">
@@ -96,7 +108,7 @@ export default function DashboardSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <Link href={item.url}>
-                      <item.icon />
+                      {<item.icon />}
                       <span>{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
@@ -110,28 +122,28 @@ export default function DashboardSidebar() {
           <SidebarGroupLabel className="sr-only">Menu</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <Collapsible defaultOpen className="group/collapsible">
+              <Collapsible defaultOpen>
                 <SidebarMenuItem>
                   <CollapsibleTrigger asChild>
-                    <SidebarMenuSubButton>
+                    <SidebarMenuButton>
                       <MenuIcon />
                       <span>Menu</span>
                       <ChevronDown className="ml-auto" />
-                    </SidebarMenuSubButton>
+                    </SidebarMenuButton>
                   </CollapsibleTrigger>
                   <CollapsibleContent>
-                    <SidebarMenuSubButton asChild>
-                      <Link href="/dashboard/categories">
-                        <Settings2 />
-                        <span>Categories</span>
-                      </Link>
-                    </SidebarMenuSubButton>
-                    <SidebarMenuSubButton asChild>
-                      <Link href="/dashboard/products">
-                        <Settings2 />
-                        <span>Products</span>
-                      </Link>
-                    </SidebarMenuSubButton>
+                    <ul>
+                      {menuSubItems.map((menuItem) => (
+                        <li key={menuItem.title}>
+                          <SidebarMenuButton asChild>
+                            <Link href={menuItem.url}>
+                              {<menuItem.icon />}
+                              <span>{menuItem.title}</span>
+                            </Link>
+                          </SidebarMenuButton>
+                        </li>
+                      ))}
+                    </ul>
                   </CollapsibleContent>
                 </SidebarMenuItem>
               </Collapsible>
@@ -154,13 +166,13 @@ export default function DashboardSidebar() {
                 side="top"
                 className="w-[--radix-popper-anchor-width]"
               >
-                <DropdownMenuItem>
-                  <Link href="/dashboard/profile">
+                <Link href="/dashboard/profile">
+                  <DropdownMenuItem>
                     <span>Profile</span>
-                  </Link>
-                </DropdownMenuItem>
+                  </DropdownMenuItem>
+                </Link>
                 <DropdownMenuItem>
-                  <span>Sign out</span>
+                  <span className="text-red-600">Sign Out</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

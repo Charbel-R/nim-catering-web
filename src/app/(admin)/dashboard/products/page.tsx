@@ -13,10 +13,9 @@ export default async function ProductPage() {
   });
 
   const products = await prisma.product.findMany();
-  console.log(products);
 
   return (
-    <section className="flex flex-col gap-7 px-4 py-6">
+    <section className="container flex flex-col gap-7 px-4 py-6">
       <div className="flex items-center gap-10">
         <h1 className="text-2xl font-bold">All Menu items </h1>
         <AddProductDrawer categories={categories} />
