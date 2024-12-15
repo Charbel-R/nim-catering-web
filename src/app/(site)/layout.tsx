@@ -1,4 +1,4 @@
-import Footer from "@/components/site/footer";
+import Footer from "@/components/footer";
 import Header from "@/components/site/header";
 
 export default function SiteLayout({
