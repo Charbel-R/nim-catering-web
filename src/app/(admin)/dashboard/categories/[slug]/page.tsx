@@ -1,13 +1,6 @@
-import AddProductDrawer from "@/components/admin/products/add-product-drawer";
-import {
-  Card,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card";
-import prisma from "@/lib/db";
-import { formatPrice } from "@/lib/price-formater";
+import AddProductDialog from "@/components/admin/products/add-product-dialog";
+import { ProductsTable } from "@/components/admin/products/products-table";
+import prisma from "@/lib/db/db";
 
 interface AdminCategoryPageProps {
   params: {
@@ -38,32 +31,11 @@ export default async function AdminCategogyPage({
 
   return (
     <section className="container px-4 py-6">
-      <h1 className="text-xl">{category.name}</h1>
-      <section>
-        <div className="flex gap-4">
-          <button className="btn">Edit</button>
-          <button className="btn">Delete</button>
-          <AddProductDrawer category={addCategory} />
-        </div>
-      </section>
-      <section className="mt-6 flex flex-col gap-4">
-        <ul>
-          {category.products.map((product) => (
-            <Card
-              key={product.id}
-              className="mb-2 flex h-16 items-center justify-between px-10"
-            >
-              <CardHeader>
-                <CardTitle>{product.name}</CardTitle>
-                <CardDescription>{product.description}</CardDescription>
-              </CardHeader>
-              <CardFooter className="gap-9">
-                <CardTitle>{formatPrice(product.price)}</CardTitle>
-              </CardFooter>
-            </Card>
-          ))}
-        </ul>
-      </section>
+      <div className="flex gap-4">
+        <h1 className="text-xl">{category.name}</h1>
+        <AddProductDialog category={addCategory} />
+      </div>
+      <ProductsTable products={category.products} category={category} />
     </section>
   );
 }

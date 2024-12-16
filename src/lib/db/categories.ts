@@ -1,6 +1,6 @@
 "use server";
 
-import prisma from "@/lib/db";
+import prisma from "@/lib/db/db";
 
 export async function getCategories() {
   try {

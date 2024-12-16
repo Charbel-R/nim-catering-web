@@ -10,18 +10,15 @@ import {
   DialogTitle,
   DialogTrigger
 } from "@/components/ui/dialog";
-import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function AddCategoryDialog() {
-  const isMobile = useIsMobile();
-
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="ghost">Add Category</Button>
       </DialogTrigger>
 
-      <DialogContent className={`${isMobile ? "max-w-[290]" : ""}`}>
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>Add Categoy</DialogTitle>
           <DialogDescription>Add a new category to your Menu</DialogDescription>

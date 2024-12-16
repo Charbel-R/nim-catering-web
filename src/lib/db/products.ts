@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 
-import prisma from "@/lib/db";
+import prisma from "@/lib/db/db";
 
 export async function createProduct(formData: FormData) {
   await prisma.product.create({

@@ -8,12 +8,11 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
-import { getCategories } from "@/lib/categories";
+import { getCategories } from "@/lib/db/categories";
 import { Category } from "@/types/category-type";
 
-const categories: Category[] = (await getCategories()) as Category[];
-
-export default function CategoryList() {
+export default async function CategoryList() {
+  const categories: Category[] = (await getCategories()) as Category[];
   return (
     <ul className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
       {categories.map((category) => (

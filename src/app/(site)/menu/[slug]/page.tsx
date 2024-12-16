@@ -2,13 +2,12 @@ import { ShoppingBasket } from "lucide-react";
 
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
-import prisma from "@/lib/db";
+import prisma from "@/lib/db/db";
 import { formatPrice } from "@/lib/price-formater";
 
 interface CategoryPageProps {

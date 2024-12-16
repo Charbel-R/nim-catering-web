@@ -17,10 +17,15 @@ import DeleteProductButton from "./delete-product-button";
 
 interface ProductPageProps {
   products: Product[];
-  categories: { name: string; id: string }[];
+  categories?: { name: string; id: string }[];
+  category?: { name: string; id: string };
 }
 
-export function ProductsTable({ products, categories }: ProductPageProps) {
+export function ProductsTable({
+  products,
+  categories,
+  category
+}: ProductPageProps) {
   return (
     <Table>
       <TableCaption>A list of your Menu Items.</TableCaption>
@@ -38,11 +43,11 @@ export function ProductsTable({ products, categories }: ProductPageProps) {
           <TableRow key={product.id}>
             <TableCell className="font-medium">{product.name}</TableCell>
             <TableCell>
-              {
-                categories.filter(
-                  (category) => category.id === product.categoryId
-                )[0].name
-              }
+              {categories
+                ? categories.filter(
+                    (category) => category.id === product.categoryId
+                  )[0].name
+                : category?.name}
             </TableCell>
             <TableCell>
               <Badge

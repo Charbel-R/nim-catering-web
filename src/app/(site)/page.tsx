@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import Logo from "@/components/logo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import prisma from "@/lib/db";
+import prisma from "@/lib/db/db";
 
 export default async function HomePage() {
   const categories = await prisma.category.findMany({

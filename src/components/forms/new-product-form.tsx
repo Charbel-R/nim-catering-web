@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { createProduct } from "@/actions/products-action";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,6 +15,8 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { createProduct } from "@/lib/db/products";
+import { NewProductSchema } from "@/lib/z-schemas";
 
 import {
   Select,
@@ -27,7 +28,7 @@ import {
 import { Switch } from "../ui/switch";
 import { Textarea } from "../ui/textarea";
 
-interface CreateProductFormProps {
+interface NewProductFormProps {
   category?: {
     id: string;
     name: string;
@@ -38,23 +39,12 @@ interface CreateProductFormProps {
   }[];
 }
 
-const formSchema = z.object({
-  name: z.string().min(2).max(50),
-  description: z
-    .string()
-    .min(10, { message: "Description must be at least 10 characters." })
-    .max(160, { message: "Description must be at most 160 characters." }),
-  price: z.string().default("0.01"),
-  published: z.boolean().default(false).optional(),
-  category: z.string()
-});
-
-export default function CreateProductForm({
+export default function NewProductForm({
   categories,
   category
-}: CreateProductFormProps) {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+}: NewProductFormProps) {
+  const form = useForm<z.infer<typeof NewProductSchema>>({
+    resolver: zodResolver(NewProductSchema),
     defaultValues: {
       name: "",
       description: "",
@@ -64,7 +54,7 @@ export default function CreateProductForm({
     }
   });
 
-  function onSubmit(formData: z.infer<typeof formSchema>) {
+  function onSubmit(formData: z.infer<typeof NewProductSchema>) {
     const formDataToSubmit = new FormData();
     formDataToSubmit.append("name", formData.name);
     formDataToSubmit.append("description", formData.description);
@@ -97,29 +87,33 @@ export default function CreateProductForm({
             <FormItem>
               <FormLabel>Give your item a name: </FormLabel>
               <FormControl>
-                <Input placeholder="chicken burger..." {...field} />
+                <Input placeholder="Enter a name ..." {...field} />
               </FormControl>
+
               <FormMessage />
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Describe your item with few words:</FormLabel>
+              <FormLabel>Describe your item:</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Tell us a little bit about yourself"
+                  placeholder="Enter a description ..."
                   className="resize-none"
                   {...field}
                 />
               </FormControl>
+
               <FormMessage />
             </FormItem>
           )}
         />
+
         <FormField
           control={form.control}
           name="price"
@@ -184,9 +178,10 @@ export default function CreateProductForm({
             )}
           />
         )}
+
         <Button
           type="submit"
-          className="mt-4 bg-blue-400 py-2 font-bold text-white hover:bg-blue-600"
+          className="mt-4 w-full bg-blue-400 py-2 font-bold text-white hover:bg-blue-600"
         >
           Add Product
         </Button>
