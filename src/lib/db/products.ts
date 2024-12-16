@@ -17,7 +17,7 @@ export async function createProduct(formData: FormData) {
             ? false
             : undefined,
       slug: (formData.get("name") as string).replace(/\s+/g, "-").toLowerCase(),
-      categoryId: formData.get("category") as string
+      categoryId: formData.get("categoryId") as string
     }
   });
   revalidatePath("/dashboard/products");
@@ -37,7 +37,7 @@ export async function updateProduct(id: string, formData: FormData) {
             ? false
             : undefined,
       slug: (formData.get("name") as string).replace(/\s+/g, "-").toLowerCase(),
-      categoryId: formData.get("category") as string
+      categoryId: formData.get("categoryId") as string
     }
   });
 }

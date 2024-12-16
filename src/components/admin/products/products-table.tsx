@@ -11,7 +11,7 @@ import {
   TableHeader,
   TableRow
 } from "@/components/ui/table";
-import { formatPrice } from "@/lib/price-formater";
+import { formatCurrencyEuro } from "@/lib/utils";
 
 import DeleteProductButton from "./delete-product-button";
 
@@ -57,7 +57,9 @@ export function ProductsTable({
                 {product.published ? "Active" : "Offline"}
               </Badge>
             </TableCell>
-            <TableCell>{formatPrice(product.price)}</TableCell>
+
+            <TableCell>{formatCurrencyEuro(product.price)}</TableCell>
+
             <TableCell>
               <div className="flex items-center gap-2">
                 <Badge variant="transparent">Edit</Badge>

@@ -48,9 +48,9 @@ export default function NewProductForm({
     defaultValues: {
       name: "",
       description: "",
-      price: "0.01",
+      price: "",
       published: false,
-      category: ""
+      categoryId: category ? category.id : ""
     }
   });
 
@@ -60,12 +60,8 @@ export default function NewProductForm({
     formDataToSubmit.append("description", formData.description);
     formDataToSubmit.append("price", formData.price);
     formDataToSubmit.append("published", formData.published ? "true" : "false");
-    if (categories) {
-      formDataToSubmit.append("category", formData.category);
-    }
-    if (category) {
-      formDataToSubmit.append("category", category.id);
-    }
+
+    formDataToSubmit.append("categoryId", formData.categoryId);
 
     createProduct(formDataToSubmit);
     form.reset();
@@ -73,13 +69,27 @@ export default function NewProductForm({
 
   return (
     <Form {...form}>
-      {category && (
-        <h2 className="font-bold">
-          Add a new product to{" "}
-          <span className="text-xl text-green-400">{category.name}</span>
-        </h2>
-      )}
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+        {category && (
+          <>
+            <h2 className="font-bold">
+              Add a new product to{" "}
+              <span className="text-xl text-green-400">{category.name}</span>
+            </h2>
+            <FormField
+              control={form.control}
+              name="categoryId"
+              render={() => (
+                <FormItem>
+                  <FormControl>
+                    <Input type="hidden" value={category.id} readOnly />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </>
+        )}
         <FormField
           control={form.control}
           name="name"
@@ -152,7 +162,7 @@ export default function NewProductForm({
         {categories && (
           <FormField
             control={form.control}
-            name="category"
+            name="categoryId"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Category</FormLabel>
