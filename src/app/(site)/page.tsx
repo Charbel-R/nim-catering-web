@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import Logo from "@/components/logo";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import prisma from "@/lib/db/db";
 
@@ -12,9 +11,9 @@ export default async function HomePage() {
   });
 
   const cateringInfo = {
-    name: "Catering",
+    name: "Nim Catering",
     description1:
-      "Welcome to Nim! We make tailor-made catering for all your canal cruises through Amsterdam!",
+      "We make tailor-made catering for all your canal cruises through Amsterdam! ",
     description2:
       "For specific wishes, please email nimcateringenevents@gmail.com or call 06 51 79 22 40"
   };
@@ -22,10 +21,9 @@ export default async function HomePage() {
   return (
     <>
       <section className="flex flex-col justify-center gap-4 px-4 py-6">
-        <Logo />
-        <Card>
+        <Card className="mx-auto flex max-w-2xl flex-col items-center">
           <CardHeader>
-            <CardTitle>{cateringInfo.name}</CardTitle>
+            <CardTitle> Welcome to {cateringInfo.name}</CardTitle>
           </CardHeader>
           <CardContent className="overflow-auto">
             {cateringInfo.description1}
@@ -39,7 +37,7 @@ export default async function HomePage() {
             <Link
               key={category.id}
               href={`/menu/${category.slug}`}
-              className="rounded-lg border p-4 shadow-md hover:shadow-red-200"
+              className="rounded-lg border p-4 shadow-md hover:shadow-blue-200"
             >
               {category.name}
             </Link>
