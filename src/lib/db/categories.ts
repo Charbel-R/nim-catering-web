@@ -9,6 +9,19 @@ export async function getCategories() {
     return error;
   }
 }
+// get CAtegories in the form { id: string, name: string }
+export async function getCategoriesWithIdAndName() {
+  try {
+    return await prisma.category.findMany({
+      select: {
+        id: true,
+        name: true
+      }
+    });
+  } catch (error) {
+    return error;
+  }
+}
 
 export async function createCategory(name: string, isPublished?: boolean) {
   const slug = name.replace(/\s+/g, "-").toLowerCase();

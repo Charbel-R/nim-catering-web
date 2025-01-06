@@ -6,3 +6,8 @@ export type Category = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type CategoriesIdAndName = {
+  id: string;
+  name: string;
+}[];

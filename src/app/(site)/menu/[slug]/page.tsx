@@ -34,21 +34,19 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   return (
     <>
       <h1 className="text-xl">{category.name}</h1>
-      <section className="mt-6 flex flex-col gap-4">
-        <ul>
-          {category.products.map((product) => (
-            <Card key={product.id} className="mt-5 flex justify-between px-10">
-              <CardHeader>
-                <CardTitle>{product.name}</CardTitle>
-                <CardDescription>{product.description}</CardDescription>
-              </CardHeader>
-              <CardFooter className="flex items-center gap-5">
-                <ShoppingBasket></ShoppingBasket>
-                <div>{formatPrice(product.price)}</div>
-              </CardFooter>
-            </Card>
-          ))}
-        </ul>
+      <section className="mt-6 flex flex-col gap-2">
+        {category.products.map((product) => (
+          <Card key={product.id} className="flex justify-between px-4">
+            <CardHeader>
+              <CardTitle>{product.name}</CardTitle>
+              <CardDescription>{product.description}</CardDescription>
+            </CardHeader>
+            <CardFooter className="flex items-center gap-5">
+              <ShoppingBasket></ShoppingBasket>
+              <div>{formatPrice(product.price)}</div>
+            </CardFooter>
+          </Card>
+        ))}
       </section>
     </>
   );

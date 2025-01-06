@@ -12,13 +12,14 @@ import {
   TableRow
 } from "@/components/ui/table";
 import { formatCurrencyEuro } from "@/lib/utils";
+import { Category } from "@/types/category-type";
 
 import DeleteProductButton from "./delete-product-button";
 
 interface ProductPageProps {
   products: Product[];
-  categories?: { name: string; id: string }[];
-  category?: { name: string; id: string };
+  categories?: Category[];
+  category?: Category;
 }
 
 export function ProductsTable({

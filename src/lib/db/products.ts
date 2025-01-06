@@ -4,6 +4,10 @@ import { revalidatePath } from "next/cache";
 
 import prisma from "@/lib/db/db";
 
+export async function getProducts() {
+  return await prisma.product.findMany();
+}
+
 export async function createProduct(formData: FormData) {
   await prisma.product.create({
     data: {

@@ -33,19 +33,26 @@ export default function AddProductDialog({
       </DialogTrigger>
 
       <DialogContent>
+        {/* Categoies */}
         {categories && (
-          <DialogHeader>
-            <DialogTitle>Add Product</DialogTitle>
-            <DialogDescription>
-              Add a new product to your Menu
-            </DialogDescription>
-          </DialogHeader>
+          <>
+            <DialogHeader>
+              <DialogTitle>Add Product</DialogTitle>
+              <DialogDescription>
+                Add a new product to your Menu
+              </DialogDescription>
+            </DialogHeader>
+            <NewProductForm categories={categories} />
+          </>
         )}
-        {categories && <NewProductForm categories={categories} />}
+
+        {/* HIdden content: sr-only */}
         <DialogTitle className="sr-only">Add Product</DialogTitle>
         <DialogDescription className="sr-only">
           Add a new product to your Menu
         </DialogDescription>
+
+        {/* If category is present, render the NewProductForm component */}
         {category && <NewProductForm category={category} />}
       </DialogContent>
     </Dialog>
