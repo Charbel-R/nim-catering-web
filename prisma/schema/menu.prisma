@@ -9,7 +9,7 @@ model Category {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@unique([id, name])
-  @@map("categories")
+  @@map("menu_categories")
 }
 
 model Product {
@@ -28,7 +28,7 @@ model Product {
   createdAt DateTime   @default(now()) @map("created_at")
   updatedAt DateTime   @updatedAt @map("updated_at")
 
-  @@map("products")
+  @@map("menu_products")
 }
 
 model Nutrient {
@@ -39,7 +39,7 @@ model Nutrient {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@map("nutrients")
+  @@map("menu_nutrients")
 }
 
 model Allergy {
@@ -50,5 +50,5 @@ model Allergy {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  @@map("allergies")
+  @@map("menu_allergies")
 }
