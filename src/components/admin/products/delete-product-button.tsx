@@ -2,7 +2,7 @@
 
 import { Trash2 } from "lucide-react";
 
-import { deleteProduct } from "@/lib/db/products";
+import { deleteProduct } from "@/db/products";
 
 interface DeleteProductButtonProps {
   productId: string;

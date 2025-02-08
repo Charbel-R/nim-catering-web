@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 
-import { createCategory } from "@/lib/db/categories";
+import { createCategory } from "@/db/categories";
 import { NewCategorySchema } from "@/lib/z-schemas";
 
 type CategoryState = {

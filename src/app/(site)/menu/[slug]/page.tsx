@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
-import prisma from "@/lib/db/db";
+import prisma from "@/db/db";
 import { formatPrice } from "@/lib/price-formater";
 
 interface CategoryPageProps {

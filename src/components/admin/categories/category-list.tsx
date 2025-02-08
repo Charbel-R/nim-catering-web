@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
-import { getCategories } from "@/lib/db/categories";
+import { getCategories } from "@/db/categories";
 import { Category } from "@/types/category-type";
 
 export default async function CategoryList() {

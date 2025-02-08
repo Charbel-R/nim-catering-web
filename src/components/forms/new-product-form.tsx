@@ -15,7 +15,7 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { createProduct } from "@/lib/db/products";
+import { createProduct } from "@/db/products";
 import { NewProductSchema } from "@/lib/z-schemas";
 
 import {

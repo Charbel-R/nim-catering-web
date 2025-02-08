@@ -1,6 +1,6 @@
 import AddProductDialog from "@/components/admin/products/add-product-dialog";
 import { ProductsTable } from "@/components/admin/products/products-table";
-import prisma from "@/lib/db/db";
+import prisma from "@/db/db";
 
 interface AdminCategoryPageProps {
   params: {

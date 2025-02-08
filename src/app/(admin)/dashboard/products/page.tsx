@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 
 import AddProductDialog from "@/components/admin/products/add-product-dialog";
 import { ProductsTable } from "@/components/admin/products/products-table";
-import { getCategories } from "@/lib/db/categories";
-import { getProducts } from "@/lib/db/products";
+import { getCategories } from "@/db/categories";
+import { getProducts } from "@/db/products";
 import { Category } from "@/types/category-type";
 import { Product } from "@/types/product-type";
 

@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 
-import prisma from "@/lib/db/db";
+import prisma from "@/db/db";
 
 export async function getProducts() {
   return await prisma.product.findMany();
