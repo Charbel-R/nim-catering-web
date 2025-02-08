@@ -1,6 +1,5 @@
 "use client";
 
-import NewProductForm from "@/components/forms/new-product-form";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -10,6 +9,8 @@ import {
   DialogTitle,
   DialogTrigger
 } from "@/components/ui/dialog";
+
+import NewProductForm from "./new-product-form";
 
 interface AddProductDialogProps {
   category?: {

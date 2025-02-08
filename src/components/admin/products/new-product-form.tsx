@@ -15,18 +15,17 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { createProduct } from "@/db/products";
-import { NewProductSchema } from "@/lib/z-schemas";
-
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue
-} from "../ui/select";
-import { Switch } from "../ui/switch";
-import { Textarea } from "../ui/textarea";
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
+import { createProduct } from "@/db/products";
+import { NewProductSchema } from "@/lib/z-schemas";
 
 interface NewProductFormProps {
   category?: {
@@ -49,7 +48,7 @@ export default function NewProductForm({
       name: "",
       description: "",
       price: "",
-      published: false,
+      isPublished: "true",
       categoryId: category ? category.id : ""
     }
   });
@@ -59,8 +58,7 @@ export default function NewProductForm({
     formDataToSubmit.append("name", formData.name);
     formDataToSubmit.append("description", formData.description);
     formDataToSubmit.append("price", formData.price);
-    formDataToSubmit.append("published", formData.published ? "true" : "false");
-
+    formDataToSubmit.append("isPublished", formData.isPublished || "false");
     formDataToSubmit.append("categoryId", formData.categoryId);
 
     createProduct(formDataToSubmit);
@@ -140,7 +138,7 @@ export default function NewProductForm({
 
         <FormField
           control={form.control}
-          name="published"
+          name="isPublished"
           render={({ field }) => (
             <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
               <div className="space-y-0.5">
@@ -151,8 +149,10 @@ export default function NewProductForm({
               </div>
               <FormControl>
                 <Switch
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
+                  checked={field.value === "true"} // Convert to boolean for Switch
+                  onCheckedChange={(checked) =>
+                    field.onChange(checked ? "true" : "false")
+                  } // Convert back to string
                 />
               </FormControl>
             </FormItem>

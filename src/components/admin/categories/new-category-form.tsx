@@ -5,12 +5,11 @@ import { useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 import { createCategoryAction } from "@/actions/category-actions";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import { NewCategorySchema } from "@/lib/z-schemas";
-
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { Switch } from "../ui/switch";
 
 export default function NewCategoryForm() {
   const [validationErrors, setValidationErrors] = useState<{ title: string }>({
@@ -70,8 +69,8 @@ export default function NewCategoryForm() {
           <span className="text-sm text-red-500">{validationErrors.title}</span>
         )}
         <div className="ml-1 flex items-center space-x-4">
-          <Label htmlFor="published">Published</Label>
-          <Switch id="published" name="published" />
+          <Label htmlFor="isPublished">Published</Label>
+          <Switch id="isPublished" name="isPublished" />
         </div>
 
         <Button type="submit">

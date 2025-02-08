@@ -52,10 +52,10 @@ export function ProductsTable({
             </TableCell>
             <TableCell>
               <Badge
-                variant={product.published ? "online" : "destructive"}
+                variant={product.isPublished ? "online" : "destructive"}
                 className="font-bold"
               >
-                {product.published ? "Active" : "Offline"}
+                {product.isPublished ? "Active" : "Offline"}
               </Badge>
             </TableCell>
 

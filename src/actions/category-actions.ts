@@ -28,7 +28,7 @@ export async function createCategoryAction(
       (data.name as string).charAt(0).toUpperCase() +
       (data.name as string).slice(1);
 
-    const isPublished = data.published === "on";
+    const isPublished = data.isPublished === "on";
     // Create the category
     const category = await createCategory(name, isPublished);
     if (category instanceof Error) {

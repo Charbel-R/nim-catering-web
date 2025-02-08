@@ -1,0 +1,54 @@
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  isPublished Boolean   @default(false)
+  products    Product[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([id, name])
+  @@map("categories")
+}
+
+model Product {
+  id           String   @id @default(cuid())
+  name         String
+  slug         String   @unique
+  description  String
+  price        Float
+  isPublished  Boolean  @default(false) @map("is_published")
+  categoryName String   @map("category_name")
+  categoryId   String   @map("category_id")
+  category     Category @relation(fields: [categoryId, categoryName], references: [id, name])
+
+  nutrients Nutrient[]
+  allergies Allergy[]
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
+
+  @@map("products")
+}
+
+model Nutrient {
+  id        String   @id @default(cuid())
+  name      String
+  productId String?  @map("product_id")
+  product   Product? @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("nutrients")
+}
+
+model Allergy {
+  id        String   @id @default(cuid())
+  name      String
+  productId String?  @map("product_id")
+  product   Product? @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("allergies")
+}

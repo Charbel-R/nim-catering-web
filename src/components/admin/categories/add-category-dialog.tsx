@@ -1,6 +1,6 @@
 "use client";
 
-import NewCategoryForm from "@/components/forms/new-category-form";
+import NewCategoryForm from "@/components/admin/categories/new-category-form";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

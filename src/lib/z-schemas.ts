@@ -7,7 +7,7 @@ export const NewProductSchema = z.object({
     .min(10, { message: "Description must be at least 10 characters." })
     .max(160, { message: "Description must be at most 160 characters." }),
   price: z.string().min(1, { message: "Price must be higher that 0" }),
-  published: z.boolean().default(false).optional(),
+  isPublished: z.string().optional(),
   categoryId: z.string().min(1, { message: "Category is required." })
 });
 
@@ -16,5 +16,5 @@ export const NewCategorySchema = z.object({
     .string()
     .min(2, { message: "Name must be at least 2 characters." })
     .max(50, { message: "Name must be at most 50 characters." }),
-  published: z.string().optional()
+  isPublished: z.string().optional()
 });

@@ -22,7 +22,7 @@ export default async function CategoryList() {
               <CardHeader>
                 <div className="flex justify-between">
                   <CardTitle>{category.name}</CardTitle>
-                  {category.published ? (
+                  {category.isPublished ? (
                     <Power
                       size={16}
                       className="text-green-800 dark:text-green-700"

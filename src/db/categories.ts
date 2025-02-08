@@ -9,6 +9,16 @@ export async function getCategories() {
     return error;
   }
 }
+//get Category by id
+export async function getCategoryNameFromId(id: string) {
+  try {
+    return await prisma.category.findUnique({
+      where: { id }
+    });
+  } catch (error) {
+    return error;
+  }
+}
 // get CAtegories in the form { id: string, name: string }
 export async function getCategoriesWithIdAndName() {
   try {
@@ -23,7 +33,7 @@ export async function getCategoriesWithIdAndName() {
   }
 }
 
-export async function createCategory(name: string, isPublished?: boolean) {
+export async function createCategory(name: string, isPublished: boolean) {
   const slug = name.replace(/\s+/g, "-").toLowerCase();
   try {
     const existingCategory = await prisma.category.findUnique({
@@ -37,7 +47,7 @@ export async function createCategory(name: string, isPublished?: boolean) {
     await prisma.category.create({
       data: {
         name,
-        published: isPublished || false,
+        isPublished,
         slug: slug
       }
     });
@@ -49,14 +59,14 @@ export async function createCategory(name: string, isPublished?: boolean) {
 export async function updateCategory(
   id: string,
   name: string,
-  published?: boolean
+  isPublished?: boolean
 ) {
   try {
     await prisma.category.update({
       where: { id },
       data: {
         name,
-        published: published,
+        isPublished,
         slug: name.replace(/\s+/g, "-").toLowerCase()
       }
     });

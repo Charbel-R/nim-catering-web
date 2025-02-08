@@ -6,7 +6,7 @@ import prisma from "@/db/db";
 export default async function HomePage() {
   const categories = await prisma.category.findMany({
     where: {
-      published: true
+      isPublished: true
     }
   });
 
