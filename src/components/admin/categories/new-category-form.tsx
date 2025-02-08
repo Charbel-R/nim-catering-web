@@ -4,11 +4,11 @@ import { useActionState, useEffect, useState } from "react";
 
 import { toast } from "sonner";
 
-import { createCategoryAction } from "@/actions/category-actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { createCategoryAction } from "@/lib/actions/category-actions";
 import { NewCategorySchema } from "@/lib/z-schemas";
 
 export default function NewCategoryForm() {

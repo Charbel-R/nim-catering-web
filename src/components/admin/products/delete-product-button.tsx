@@ -11,9 +11,9 @@ interface DeleteProductButtonProps {
 const DeleteProductButton: React.FC<DeleteProductButtonProps> = ({
   productId
 }) => {
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (window.confirm("Are you sure you want to delete this product?")) {
-      deleteProduct(productId);
+      await deleteProduct(productId);
     }
   };
 

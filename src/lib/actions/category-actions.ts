@@ -28,8 +28,9 @@ export async function createCategoryAction(
       (data.name as string).charAt(0).toUpperCase() +
       (data.name as string).slice(1);
 
+    // Data isPublished is a string, convert it to a boolean
     const isPublished = data.isPublished === "on";
-    // Create the category
+    // Create the category in the database
     const category = await createCategory(name, isPublished);
     if (category instanceof Error) {
       return { error: category.message };
@@ -42,6 +43,5 @@ export async function createCategoryAction(
   } finally {
     // Revalidate the categories page
     revalidatePath("/dashboard/categories");
-    // Clear the form
   }
 }

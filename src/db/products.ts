@@ -63,8 +63,13 @@ export async function updateProduct(id: string, formData: FormData) {
 }
 
 export async function deleteProduct(id: string) {
-  await prisma.product.delete({
-    where: { id }
-  });
-  revalidatePath("/dashboard/products");
+  try {
+    await prisma.product.delete({
+      where: { id }
+    });
+  } catch (error) {
+    console.error(error);
+  } finally {
+    revalidatePath("/(admin)/dashboard/products");
+  }
 }

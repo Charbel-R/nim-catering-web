@@ -88,6 +88,7 @@ export default function NewProductForm({
             />
           </>
         )}
+
         <FormField
           control={form.control}
           name="name"

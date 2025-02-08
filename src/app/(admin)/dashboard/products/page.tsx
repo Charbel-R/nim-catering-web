@@ -36,7 +36,7 @@ export default function ProductPage() {
       <div className="flex items-center gap-10">
         <AddProductDialog categories={categories} />
       </div>
-      <ProductsTable products={products} categories={categories} />
+      <ProductsTable products={products} />
     </section>
   );
 }

@@ -5,10 +5,10 @@ export type Product = {
   description: string;
   price: number;
   isPublished: boolean;
-  categotyName: string;
+  categoryName: string;
   categoryId: string;
-  nutrients: string;
-  allergies: string;
+  nutrients?: string[];
+  allergies?: string[];
   createdAt: Date;
   updatedAt: Date;
 };

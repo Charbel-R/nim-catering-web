@@ -12,21 +12,14 @@ import {
   TableRow
 } from "@/components/ui/table";
 import { formatCurrencyEuro } from "@/lib/utils";
-import { Category } from "@/types/category-type";
 
 import DeleteProductButton from "./delete-product-button";
 
 interface ProductPageProps {
   products: Product[];
-  categories?: Category[];
-  category?: Category;
 }
 
-export function ProductsTable({
-  products,
-  categories,
-  category
-}: ProductPageProps) {
+export function ProductsTable({ products }: ProductPageProps) {
   return (
     <Table>
       <TableCaption>A list of your Menu Items.</TableCaption>
@@ -43,19 +36,13 @@ export function ProductsTable({
         {products.map((product) => (
           <TableRow key={product.id}>
             <TableCell className="font-medium">{product.name}</TableCell>
-            <TableCell>
-              {categories
-                ? categories.filter(
-                    (category) => category.id === product.categoryId
-                  )[0].name
-                : category?.name}
-            </TableCell>
+            <TableCell>{product.categoryName}</TableCell>
             <TableCell>
               <Badge
                 variant={product.isPublished ? "online" : "destructive"}
                 className="font-bold"
               >
-                {product.isPublished ? "Active" : "Offline"}
+                {product.isPublished ? "Published" : "Offline"}
               </Badge>
             </TableCell>
 
