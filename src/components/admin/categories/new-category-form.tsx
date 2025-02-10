@@ -16,10 +16,13 @@ export default function NewCategoryForm() {
     title: ""
   });
 
-  const [state, dispatch, isPending] = useActionState(createCategoryAction, {
-    success: "",
-    error: undefined
-  });
+  const [state, runCreateAction, isPending] = useActionState(
+    createCategoryAction,
+    {
+      success: "",
+      error: undefined
+    }
+  );
 
   useEffect(() => {
     if (state.success) {
@@ -40,7 +43,7 @@ export default function NewCategoryForm() {
       return;
     }
     // create category
-    dispatch(formData);
+    runCreateAction(formData);
     // reset the form after submission
   }
 

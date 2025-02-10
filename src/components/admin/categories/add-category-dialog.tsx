@@ -20,7 +20,7 @@ export default function AddCategoryDialog() {
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add Categoy</DialogTitle>
+          <DialogTitle>Add Category</DialogTitle>
           <DialogDescription>Add a new category to your Menu</DialogDescription>
         </DialogHeader>
         <NewCategoryForm />
