@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 
+import { SignOutButton } from "@clerk/nextjs";
 import {
   BadgeCheck,
   ChevronsUpDown,
@@ -26,7 +27,8 @@ export function UserAvatar({
   user
 }: {
   user: {
-    name: string;
+    firstName: string;
+    fullName: string;
     email: string;
     avatar: string;
   };
@@ -53,14 +55,13 @@ export function UserAvatar({
       <DropdownMenuTrigger asChild>
         <div className="flex cursor-pointer items-center gap-2">
           <Avatar className="h-8 w-8 rounded-full">
-            <AvatarImage src={user.avatar} alt={user.name} />
+            <AvatarImage src={user.avatar} alt={user.fullName} />
             <AvatarFallback className="rounded-lg">
-              {user.name[0]}
+              {user.firstName[0]}
             </AvatarFallback>
           </Avatar>
           <div className={"grid flex-1 text-left text-sm leading-tight"}>
-            <span className="truncate font-semibold">{user.name}</span>
-            <span className="truncate text-xs">{user.email}</span>
+            <span className="truncate font-semibold">{user.firstName}</span>
           </div>
           <ChevronsUpDown className="ml-auto size-3" />
         </div>
@@ -74,11 +75,11 @@ export function UserAvatar({
         <DropdownMenuLabel className="p-0 font-normal">
           <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
             <Avatar className="h-8 w-8 rounded-lg">
-              <AvatarImage src={user.avatar} alt={user.name} />
+              <AvatarImage src={user.avatar} alt={user.fullName} />
               <AvatarFallback className="rounded-lg">CN</AvatarFallback>
             </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-semibold">{user.name}</span>
+              <span className="truncate font-semibold">{user.fullName}</span>
               <span className="truncate text-xs">{user.email}</span>
             </div>
           </div>
@@ -92,6 +93,7 @@ export function UserAvatar({
             </DropdownMenuItem>
           </Link>
         </DropdownMenuGroup>
+
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           {navItems.map((item) => (
@@ -104,10 +106,10 @@ export function UserAvatar({
           ))}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        {/* TODO: Add a log out button */}
+
         <DropdownMenuItem>
           <LogOut />
-          Log out
+          <SignOutButton />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

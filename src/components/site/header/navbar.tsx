@@ -1,6 +1,8 @@
 import Link from "next/link";
 
-import { ShoppingCart, UserIcon } from "lucide-react";
+import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
+import { ShoppingCart } from "lucide-react";
 
 import Logo from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -8,11 +10,14 @@ import { Button } from "@/components/ui/button";
 
 import { UserAvatar } from "./user-avatar";
 
-const Navbar = () => {
-  const user = {
-    name: "John Doe",
-    email: "admin@gmail.com",
-    avatar: ""
+const Navbar = async () => {
+  const user = await currentUser();
+
+  const userDTO = {
+    firstName: user?.firstName ?? "",
+    fullName: user?.fullName ?? "",
+    email: user?.emailAddresses[0].emailAddress ?? "",
+    avatar: user?.imageUrl ?? ""
   };
   return (
     <nav className="flex items-center justify-between">
@@ -28,16 +33,14 @@ const Navbar = () => {
           </Link>
         </Button>
 
-        {user ? (
-          <UserAvatar user={user} />
-        ) : (
-          <Button asChild>
-            <Link href="/sign-in">
-              <UserIcon />
-              Sign In
-            </Link>
-          </Button>
-        )}
+        <SignedOut>
+          <SignInButton />
+        </SignedOut>
+
+        <SignedIn>
+          {/* <UserButton /> */}
+          <UserAvatar user={userDTO} />
+        </SignedIn>
       </div>
     </nav>
   );
