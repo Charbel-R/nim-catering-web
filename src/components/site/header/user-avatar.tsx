@@ -2,15 +2,8 @@
 
 import Link from "next/link";
 
-import { SignOutButton } from "@clerk/nextjs";
-import {
-  BadgeCheck,
-  ChevronsUpDown,
-  CreditCard,
-  ListOrdered,
-  LogOut,
-  LucideLayoutDashboard
-} from "lucide-react";
+import { OrganizationSwitcher, SignOutButton, useUser } from "@clerk/nextjs";
+import { ChevronsUpDown, LogOut } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -23,49 +16,36 @@ import {
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 
-export function UserAvatar({
-  user
-}: {
-  user: {
-    firstName: string;
-    fullName: string;
-    email: string;
-    avatar: string;
+import { adminNavItems, orgNavItems, userNavItems } from "./nabvar-routes";
+
+export function UserAvatar() {
+  const { user } = useUser();
+  if (!user) return null;
+
+  const userDTO = {
+    firstName: user?.firstName ?? "",
+    fullName: user?.fullName ?? "",
+    email: user?.emailAddresses[0].emailAddress ?? "",
+    avatar: user?.imageUrl ?? ""
   };
-}) {
-  const navItems = [
-    {
-      title: "Account",
-      icon: BadgeCheck,
-      href: "/account"
-    },
-    {
-      title: "Billing",
-      icon: CreditCard,
-      href: "/billing"
-    },
-    {
-      title: "Orders",
-      icon: ListOrdered,
-      href: "/orders"
-    }
-  ];
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <div className="flex cursor-pointer items-center gap-2">
           <Avatar className="h-8 w-8 rounded-full">
-            <AvatarImage src={user.avatar} alt={user.fullName} />
+            <AvatarImage src={userDTO.avatar} alt={userDTO.fullName} />
             <AvatarFallback className="rounded-lg">
-              {user.firstName[0]}
+              {userDTO.firstName[0]}
             </AvatarFallback>
           </Avatar>
           <div className={"grid flex-1 text-left text-sm leading-tight"}>
-            <span className="truncate font-semibold">{user.firstName}</span>
+            <span className="truncate font-semibold">{userDTO.firstName}</span>
           </div>
           <ChevronsUpDown className="ml-auto size-3" />
         </div>
       </DropdownMenuTrigger>
+
       <DropdownMenuContent
         className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
         side="bottom"
@@ -75,28 +55,20 @@ export function UserAvatar({
         <DropdownMenuLabel className="p-0 font-normal">
           <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
             <Avatar className="h-8 w-8 rounded-lg">
-              <AvatarImage src={user.avatar} alt={user.fullName} />
+              <AvatarImage src={userDTO.avatar} alt={userDTO.fullName} />
               <AvatarFallback className="rounded-lg">CN</AvatarFallback>
             </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-semibold">{user.fullName}</span>
-              <span className="truncate text-xs">{user.email}</span>
+              <span className="truncate font-semibold">{userDTO.fullName}</span>
+              <span className="truncate text-xs">{userDTO.email}</span>
             </div>
           </div>
         </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <Link href="/dashboard">
-            <DropdownMenuItem>
-              <LucideLayoutDashboard />
-              Admin dashboard
-            </DropdownMenuItem>
-          </Link>
-        </DropdownMenuGroup>
 
         <DropdownMenuSeparator />
+
         <DropdownMenuGroup>
-          {navItems.map((item) => (
+          {adminNavItems.map((item) => (
             <Link key={item.title} href={item.href}>
               <DropdownMenuItem>
                 <item.icon />
@@ -105,6 +77,33 @@ export function UserAvatar({
             </Link>
           ))}
         </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+
+        <DropdownMenuGroup>
+          {orgNavItems.map((item) => (
+            <Link key={item.title} href={item.href}>
+              <DropdownMenuItem>
+                <item.icon />
+                {item.title}
+              </DropdownMenuItem>
+            </Link>
+          ))}
+
+          <OrganizationSwitcher />
+        </DropdownMenuGroup>
+
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          {userNavItems.map((item) => (
+            <Link key={item.title} href={item.href}>
+              <DropdownMenuItem>
+                <item.icon />
+                {item.title}
+              </DropdownMenuItem>
+            </Link>
+          ))}
+        </DropdownMenuGroup>
+
         <DropdownMenuSeparator />
 
         <DropdownMenuItem>
